@@ -9,6 +9,7 @@ import matplotlib.pyplot as pyplot
 
 from sklearn import preprocessing
 from sklearn.mixture import GaussianMixture
+from sklearn.cluster import KMeans
 
 def getrgb(filepath):
 	imimage = imageio.imread(filepath, pilmode="RGB")
@@ -36,10 +37,12 @@ for filepath in glob.glob("data/*"):
 
 print(dataset)
 
-data = dataset.iloc[:,0:3]
+data = dataset.iloc[:,0:6]
+print(data)
 data = preprocessing.normalize(data)
 
 gmm_machine = GaussianMixture(n_components = 5)
+# gmm_machine = KMeans(n_clusters = 5)
 gmm_machine.fit(data)
 gmm_results = gmm_machine.predict(data)
 # print(gmm_results)
